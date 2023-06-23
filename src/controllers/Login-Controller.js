@@ -7,7 +7,7 @@ class LoginController{
 
         return  res.json({
             status: true,
-            mensagem: `Usuário valido`, //texto de exemplo
+            mensagem: `Usuário valido`, //texto de exemplo mudar depois
             result: resultBD
         });
 }
