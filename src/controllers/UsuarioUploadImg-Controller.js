@@ -1,14 +1,14 @@
-const UsuarioUploadImgRepository = require("../repository/UsuarioUploadImg-Repository.js");
+const usuarioUploadImgRepository = require("../repository/UsuarioUploadImg-Repository.js");
 
-class UsuarioUploadImgController{
+class usuarioUploadImgController{
 
-    async UploadFoto(){
+    async uploadFoto(){
 
         let img = single('img');
 
-        return await  UsuarioUploadImgRepository.storage(img);
+        return await  usuarioUploadImgRepository.storage(img);
     }
 
 }
 
-module.exports = new UsuarioUploadImgController();
+module.exports = new usuarioUploadImgController();

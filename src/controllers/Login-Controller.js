@@ -1,9 +1,9 @@
-const LoginRepository = require("../repository/Login-Repository.js");
+const loginRepository = require("../repository/Login-Repository.js");
 
-class LoginController{
+class loginController{
 
-    async Login(req, res){
-        let resultBD = await LoginRepository.search(req.body);
+    async login(req, res){
+        let resultBD = await loginRepository.search(req.body);
 
         return  res.json({
             status: true,
@@ -14,4 +14,4 @@ class LoginController{
 }
 
 
-module.exports = new LoginController();
+module.exports = new loginController();

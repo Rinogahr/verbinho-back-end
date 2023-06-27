@@ -1,11 +1,11 @@
-const HomeRepository = require("../repository/Home-Repository.js");
+const homeRepository = require("../repository/Home-Repository.js");
 
-class HomeController{
+class homeController{
 
 
-    async Home(){
-        return await HomeRepository.Home();
+    async home(){
+        return await homeRepository.home();
     }
 }
 
-module.exports = new HomeController();
+module.exports = new homeController();

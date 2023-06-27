@@ -25,16 +25,16 @@ Routers.delete('/del-membro', MembroController.delete);
 
 // ROTAS USUÁRIO
 Routers.get('/usuario', UsuarioController.index);
-Routers.get('/usuario/:id', UsuarioController.finById);
+Routers.get('/usuario/:id', UsuarioController.findById);
 Routers.post('/new-usuario', UsuarioController.store);
 Routers.put('/upd-usuario', UsuarioController.update);
 Routers.delete('/del-usuario', UsuarioController.delete);
 
 
 //ROTAS UNICAS
-Routers.post('/login', LoginController.Login);
-Routers.get('/home', HomeController.Home);
-Routers.post('uploadFoto', UsuarioUploadImgController.UploadFoto);
+Routers.post('/login', LoginController.login);
+Routers.get('/home', HomeController.home);
+Routers.post('uploadFoto', UsuarioUploadImgController.uploadFoto);
 
 
 

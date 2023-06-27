@@ -1,6 +1,6 @@
 
 
-class HomeRepository{
+class homeRepository{
 
     async Home(req, res){
         const authContent = req.header.token;
@@ -10,4 +10,4 @@ class HomeRepository{
 }
 
 
-module.exports = new HomeRepository();
+module.exports = new homeRepository();

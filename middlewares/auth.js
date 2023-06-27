@@ -2,7 +2,7 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 
-class Auth{ // arquivo criado para configurar  a autorização de adm ou não apenas a configuarção de adm foi criado no momento irei criar a outra depois
+class auth{ // arquivo criado para configurar  a autorização de adm ou não apenas a configuarção de adm foi criado no momento irei criar a outra depois
 
    async eAdmin(req, res, next){
         const autorizarHeader  = req.headers.authorization; // vareavel que irá receber a autentificação do token gerado
@@ -73,7 +73,7 @@ class Auth{ // arquivo criado para configurar  a autorização de adm ou não ap
        }
 }
 
-module.exports = new Auth(); // exportando a função para poder utilizar em outros lugares
+module.exports = new auth(); // exportando a função para poder utilizar em outros lugares
 
 
 // rota utilizadas

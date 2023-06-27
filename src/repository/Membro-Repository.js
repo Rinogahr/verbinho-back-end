@@ -1,12 +1,22 @@
-const QueryBase = require("../middlewares/queryBase");
 const {querySync} = require("../../mysql/connection");
 const UsuarioRepository = require("../repository/Usuario-Repository.js");
 
 class MembroRepository{
 
-    async FindAll(){
+    async queryBase(){
+        let query =
+        `SELECT
+            id, nome, dataNasc,
+            sexo, email, dpId,
+            usuId, foto_membro
+         FROM membro  `;
+
+        return query;
+    }
+
+    async findAll(){
         try {
-         let list = await querySync(QueryBase.Membro());
+         let list = await querySync(queryBase);
 
          return list
 
@@ -15,10 +25,10 @@ class MembroRepository{
         }
      }
 
-     async FindById( id ){
+     async findById( id ){
         try {
 
-         let query = QueryBase.Membro();
+         let query = queryBase;
          query += ` WHERE id = ${id}`
 
          return await querySync(query);
@@ -28,13 +38,13 @@ class MembroRepository{
         }
      }
 
-    async Creater( req, res ){
+    async creater( req, res ){
         let objNewUsuario ={
             login: req.login,
             senha: req.senha,
             repeteSenha: req.repeteSenha
         }
-        let query = QueryBase.Membro();
+        let query = queryBase;
         query += ` WHERE email = '${req.email}' `;
 
         let result = await querySync(query);
@@ -45,7 +55,7 @@ class MembroRepository{
                 result: result
             }
         }else{
-            let createUsuario = await UsuarioRepository.Creater(objNewUsuario);
+            let createUsuario = await UsuarioRepository.creater(objNewUsuario);
             if(createUsuario.result.affectedRows > 0){
                 let idNewUsuario = createUsuario.result.insertId;
 
@@ -78,8 +88,8 @@ class MembroRepository{
     }
 
 
-    async Update( req, res ){}
-    async Destroy( req, res ){}
+    async update( req, res ){}
+    async destroy( req, res ){}
 
 }
 

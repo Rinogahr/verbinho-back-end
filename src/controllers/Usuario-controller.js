@@ -1,42 +1,33 @@
-const UsuarioRepository = require("../repository/Usuario-Repository.js")
+const usuarioRepository = require("../repository/Usuario-Repository.js")
 
 class UsuarioDepartamentoController{
 
     async index( req, res ){
-        let resultBD = await UsuarioRepository.findAll();
+        let resultBD = await usuarioRepository.findAll();
 
-        return  res.json({
-            status: 200,
-            mensage: "Consulta realizada com sucesso!",
-            list: resultBD
-           })
+        return  res.json({result: resultBD});
     }
 
-    async finById( req,res ){
-        let resultBD = await UsuarioRepository.finById(req.params.id);
+    async findById( req,res ){
+        let resultBD = await usuarioRepository.findById(req.params.id);
 
-        return  res.json({
-            status: 200,
-            mensage: "Consulta realizada com sucesso!",
-            usuario: resultBD
-           });
-
+        return  res.json({result: resultBD});
     }
 
     async store(req,res){
-        let resultBD = await UsuarioRepository.creater(req.body);
+        let resultBD = await usuarioRepository.creater(req.body);
 
         return res.send(resultBD);
     }
 
     async update(req,res){
-        let resultBD = await UsuarioRepository.update(req.body);
+        let resultBD = await usuarioRepository.update(req.body);
 
         return res.send(resultBD);
     }
 
     async delete(req,res){
-        let resultBD = await UsuarioRepository.destroy(req.body);
+        let resultBD = await usuarioRepository.destroy(req.body);
 
         return res.send(resultBD);
     }

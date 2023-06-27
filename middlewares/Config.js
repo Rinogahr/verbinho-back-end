@@ -9,16 +9,16 @@ const DATA_CRIPTO = {
 }
 
 
-class Config{
+class config{
 
-    Crypto(senha){
+    crypto(senha){
        const cipher = crypto.createCipher(DATA_CRIPTO.alg, DATA_CRIPTO.pwd);
        const crypterSenha = cipher.update(senha,DATA_CRIPTO.chaset, DATA_CRIPTO.tipo);
 
        return crypterSenha;
     }
 
-    Decrypto(senha){
+    decrypto(senha){
         const cipher = crypto.createDecipher(DATA_CRIPTO.alg, DATA_CRIPTO.pwd);
         const crypterSenha = cipher.update(senha,DATA_CRIPTO.chaset, DATA_CRIPTO.tipo);
 
@@ -26,4 +26,4 @@ class Config{
     }
 }
 
-module.exports = new Config();
+module.exports = new config();

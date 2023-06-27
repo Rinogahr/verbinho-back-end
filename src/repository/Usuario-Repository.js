@@ -1,31 +1,42 @@
-const QueryBase = require("../middlewares/queryBase");
 const {querySync} = require("../../mysql/connection");
-const Config = require("../middlewares/Config");
+const config = require("../../middlewares/Config");
 
 class UsuarioRepository{
 
+    queryBase(){
+        let query =
+            `SELECT
+                id, login, senha
+            FROM usuario`;
+    
+            return query;
+    }
+
     async findAll(){
        try {
-        let list = await querySync(QueryBase.Usuario());
+        let query = await querySync(this.queryBase());
 
-        return list
+        if(query.length > 0){
+            return {status: true, mensagem: "Consulta realizada com sucesso!", query: query}; 
+        }
 
-       } catch (error) {
-            return error
+    } catch (err) {
+        return {status: false, mensagem: "Erro na consulta favor verificar !", err: err}
        }
     }
 
     async findById( id ){
        try {
-
-        let query = QueryBase.Usuario();
+        let query = this.queryBase();
         query += ` WHERE id = ${id}`
+        let result = await querySync(query);
+        if(result.length > 0){
+            return {status: true, mensagem: "Consulta realizada com sucesso!", query: result}; 
+        }
 
-        return await querySync(query);
-
-       } catch (error) {
-            return error
-       }
+        } catch (err) {
+            return {status: false, mensagem: "Erro na consulta favor verificar !", err: err}
+        }
     }
 
     async creater( req, res ){
@@ -36,7 +47,7 @@ class UsuarioRepository{
                 mensagem: "senha e Repetir Senha não são as mesmas"
             };
         }else{
-            let senhaCripto = await Config.Crypto(req.senha);
+            let senhaCripto = await config.crypto(req.senha);
 
             let newUsuario = await querySync("insert into usuario (login, senha) values (?,?)",
             [  req.login,
@@ -70,12 +81,12 @@ class UsuarioRepository{
                 mensagem: "senha e Repetir Senha não são as mesmas"
             };
         }else{
-            let query = QueryBase.Usuario();
+            let query = queryBase;
                 query += ` where id = ${req.id}`;
             let resp = await querySync(query);
 
             if(resp.length > 0){
-                let upsenha = Config.Crypto(req.senha);
+                let upsenha = config.crypto(req.senha);
                 let update  = await querySync(` UPDATE
                                                     usuario
                                                 SET

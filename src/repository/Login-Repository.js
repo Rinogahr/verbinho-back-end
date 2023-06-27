@@ -1,14 +1,14 @@
 require("dotenv").config();
-const QueryBase = require("../middlewares/queryBase.js");
+const QueryBase = require("../../middlewares/queryBase.js");
 const {querySync} = require("../../mysql/connection.js");
-const Config = require("../middlewares/Config.js");
+const config = require("../../middlewares/config.js");
 const jwt = require("jsonwebtoken");
 
-class LoginRepository{
+class loginRepository{
 
     async search(req, res){
         let result = {};
-        let senha = Config.Crypto(req.senha);
+        let senha = config.crypto(req.senha);
         let query = QueryBase.AllRegister();
         query += ` AND login = '${req.login}' AND senha = '${senha}' AND dpId = '${req.departamento}'`;
 
@@ -33,4 +33,4 @@ class LoginRepository{
 }
 
 
-module.exports = new LoginRepository();
+module.exports = new loginRepository();
