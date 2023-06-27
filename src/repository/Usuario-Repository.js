@@ -4,7 +4,7 @@ const Config = require("../middlewares/Config");
 
 class UsuarioRepository{
 
-    async FindAll(){
+    async findAll(){
        try {
         let list = await querySync(QueryBase.Usuario());
 
@@ -15,7 +15,7 @@ class UsuarioRepository{
        }
     }
 
-    async FindById( id ){
+    async findById( id ){
        try {
 
         let query = QueryBase.Usuario();
@@ -28,7 +28,7 @@ class UsuarioRepository{
        }
     }
 
-    async Creater( req, res ){
+    async creater( req, res ){
         let result ={};
         if(req.senha != req.repeteSenha){
             return result = {
@@ -61,7 +61,7 @@ class UsuarioRepository{
 
     }
 
-    async Update( req, res ){
+    async update( req, res ){
 
         let result = {};
         if(req.senha != req.repeteSenha){
@@ -104,7 +104,7 @@ class UsuarioRepository{
         }
     }
 
-    async Destroy( req, res ){ }
+    async destroy( req, res ){ }
 
 }
 

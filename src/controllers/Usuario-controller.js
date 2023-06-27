@@ -3,7 +3,7 @@ const UsuarioRepository = require("../repository/Usuario-Repository.js")
 class UsuarioDepartamentoController{
 
     async index( req, res ){
-        let resultBD = await UsuarioRepository.FindAll();
+        let resultBD = await UsuarioRepository.findAll();
 
         return  res.json({
             status: 200,
@@ -13,7 +13,7 @@ class UsuarioDepartamentoController{
     }
 
     async finById( req,res ){
-        let resultBD = await UsuarioRepository.FindById(req.params.id);
+        let resultBD = await UsuarioRepository.finById(req.params.id);
 
         return  res.json({
             status: 200,
@@ -24,19 +24,19 @@ class UsuarioDepartamentoController{
     }
 
     async store(req,res){
-        let resultBD = await UsuarioRepository.Creater(req.body);
+        let resultBD = await UsuarioRepository.creater(req.body);
 
         return res.send(resultBD);
     }
 
     async update(req,res){
-        let resultBD = await UsuarioRepository.Update(req.body);
+        let resultBD = await UsuarioRepository.update(req.body);
 
         return res.send(resultBD);
     }
 
     async delete(req,res){
-        let resultBD = await UsuarioRepository.Update(req.body);
+        let resultBD = await UsuarioRepository.destroy(req.body);
 
         return res.send(resultBD);
     }
