@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require("express");
-const routes = require("./src/routers/routers");
+const routes = require("./routers/routers");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const { eAdmin } = require("./middlewares/auth"); //arquivo para autentificação com as configurações de adm ou não apenas criado com adm
+const { eAdmin } = require("./app/src/middlewares/auth"); //arquivo para autentificação com as configurações de adm ou não apenas criado com adm
 const { json } = require("express");
 
 const app = express();

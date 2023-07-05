@@ -1,4 +1,4 @@
-
+const {querySync} = require("../../../mysql/connection");
 
 class homeRepository{
 

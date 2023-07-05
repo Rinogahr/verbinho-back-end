@@ -1,7 +1,7 @@
 require("dotenv").config();
-const QueryBase = require("../../middlewares/queryBase.js");
-const {querySync} = require("../../mysql/connection.js");
-const config = require("../../middlewares/config.js");
+const QueryBase = require("../middlewares/queryBase");
+const {querySync} = require("../../../mysql/connection");
+const config = require("../middlewares/Config");
 const jwt = require("jsonwebtoken");
 
 class loginRepository{

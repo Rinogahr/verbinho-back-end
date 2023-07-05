@@ -27,7 +27,7 @@ class UsuarioDepartamentoController{
     }
 
     async delete(req,res){
-        let resultBD = await usuarioRepository.destroy(req.body);
+        let resultBD = await usuarioRepository.destroy(req.query.id);
 
         return res.send(resultBD);
     }

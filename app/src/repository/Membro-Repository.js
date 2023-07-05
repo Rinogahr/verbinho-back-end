@@ -1,9 +1,9 @@
-const {querySync} = require("../../mysql/connection");
+const {querySync} = require("../../../mysql/connection");
 const UsuarioRepository = require("../repository/Usuario-Repository.js");
 
 class MembroRepository{
 
-    async queryBase(){
+    queryBase(){
         let query =
         `SELECT
             id, nome, dataNasc,
@@ -16,26 +16,29 @@ class MembroRepository{
 
     async findAll(){
         try {
-         let list = await querySync(queryBase);
-
-         return list
-
-        } catch (error) {
-             return error
+         let query = await querySync(this.queryBase());
+ 
+         if(query.length > 0){
+             return {status: true, mensagem: "Consulta realizada com sucesso!", query: query}; 
+         }
+ 
+     } catch (err) {
+         return {status: false, mensagem: "Erro na consulta favor verificar !", err: err}
         }
      }
-
+ 
      async findById( id ){
         try {
-
-         let query = queryBase;
+         let query = this.queryBase();
          query += ` WHERE id = ${id}`
-
-         return await querySync(query);
-
-        } catch (error) {
-             return error
-        }
+         let result = await querySync(query);
+         if(result.length > 0){
+             return {status: true, mensagem: "Consulta realizada com sucesso!", query: result}; 
+         }
+ 
+         } catch (err) {
+             return {status: false, mensagem: "Erro na consulta favor verificar !", err: err}
+         }
      }
 
     async creater( req, res ){
@@ -44,7 +47,7 @@ class MembroRepository{
             senha: req.senha,
             repeteSenha: req.repeteSenha
         }
-        let query = queryBase;
+        let query = this.queryBase();
         query += ` WHERE email = '${req.email}' `;
 
         let result = await querySync(query);

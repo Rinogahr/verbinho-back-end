@@ -19,19 +19,29 @@ class DepartamentoController{
                 })
         }
     }
-    async finById( req,res ){
-        let resultBD = await departamentoRepository.finById(req.params.id);
+    async findById( req,res ){
+        let resultBD = await departamentoRepository.findById(req.params.id);
 
-        return  res.json({
-            status: 200,
-            mensage: "Consulta realizada com sucesso!",
-            usuario: resultBD
-           });
-
+        return  res.json({result: resultBD});
     }
-    async store(req,res){}
-    async update(req,res){}
-    async delete(req,res){}
+
+    async store(req,res){
+        let resultBD = await departamentoRepository.creater(req.body);
+
+        return res.send(resultBD);
+    }
+
+    async update(req,res){
+        let resultBD = await departamentoRepository.update(req.body);
+
+        return res.send(resultBD);
+    }
+
+    async delete(req,res){
+        let resultBD = await departamentoRepository.destroy(req.query.id);
+
+        return res.send(resultBD);
+    }
 }
 
 module.exports = new DepartamentoController();

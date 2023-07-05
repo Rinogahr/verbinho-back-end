@@ -1,5 +1,5 @@
-const {querySync} = require("../../mysql/connection");
-const config = require("../../middlewares/Config");
+const {querySync} = require("../../../mysql/connection");
+const config = require("../middlewares/Config");
 
 class UsuarioRepository{
 
@@ -47,27 +47,35 @@ class UsuarioRepository{
                 mensagem: "senha e Repetir Senha não são as mesmas"
             };
         }else{
-            let senhaCripto = await config.crypto(req.senha);
-
-            let newUsuario = await querySync("insert into usuario (login, senha) values (?,?)",
-            [  req.login,
-                senhaCripto,
-            ]);
-
-            if(newUsuario.affectedRows > 0){
+            let query = this.queryBase();
+            query += ` WHERE login = "${req.login}"`;
+            let result = await querySync(query);
+            if(result.length > 0){
                 return result = {
-                    result: newUsuario,
-                    status: true,
-                    mensagem: "Usuário gravado com sucesso!",
-                };
+                    mensagem: "Não foi possivel registrar, já existe um usuário cadastrado"
+                }
             }else{
-                return result = {
-                    result: newUsuario,
-                    status: false,
-                    mensagem: "nao foi possivel gravar",
-                };
-            }
+                let senhaCripto = await config.crypto(req.senha);
 
+                let newUsuario = await querySync("insert into usuario (login, senha) values (?,?)",
+                [  req.login,
+                    senhaCripto,
+                ]);
+    
+                if(newUsuario.affectedRows > 0){
+                    return result = {
+                        result: newUsuario,
+                        status: true,
+                        mensagem: "Usuário gravado com sucesso!",
+                    };
+                }else{
+                    return result = {
+                        result: newUsuario,
+                        status: false,
+                        mensagem: "nao foi possivel gravar",
+                    };
+                }
+            }
         }
 
     }
@@ -81,7 +89,7 @@ class UsuarioRepository{
                 mensagem: "senha e Repetir Senha não são as mesmas"
             };
         }else{
-            let query = queryBase;
+            let query = this.queryBase();
                 query += ` where id = ${req.id}`;
             let resp = await querySync(query);
 
@@ -115,7 +123,36 @@ class UsuarioRepository{
         }
     }
 
-    async destroy( req, res ){ }
+    async destroy( req, res ){ 
+        let result = {};
+        let query = this.queryBase();
+            query += ` where id = ${req}`;
+        let resp = await querySync(query);
+        if(resp.length > 0){
+            try {
+                let destroy  = await querySync(`DELETE FROM usuario  WHERE id = ${req}`);
+            if( destroy.affectedRows > 0){
+                return result = {
+                    status: true,
+                    mensagem: "sucesso: usuário excluido com sucesso!",
+                    resp: destroy
+                };
+            }else{
+                return result = {
+                    status: false,
+                    mensagem: "error: Não foi possivel o procedimento, enter em contato com o Suporte!"
+                };
+            }
+            } catch (error) {
+                return error
+            }
+        }else{
+            return result = {
+                status: false,
+                mensagem: "error: usuário não encontrado!"
+            };
+        }
+    }
 
 }
 
