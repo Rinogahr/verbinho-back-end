@@ -1,4 +1,6 @@
-const express = require('express')
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
 const Routers = express.Router();
 const DepartamentoController = require("../app/src/controllers/Departamento-Controller");
 const MembroController = require("../app/src/controllers/Membro-Controller");
@@ -6,6 +8,20 @@ const UsuarioController = require("../app/src/controllers/Usuario-controller");
 const LoginController = require("../app/src/controllers/Login-Controller.js");
 const HomeController = require("../app/src/controllers/Home-Controller.js");
 const UsuarioUploadImgController = require("../app/src/controllers/UsuarioUploadImg-Controller.js");
+
+
+// Configurando o armazenamento dos arquivos de upload
+const storage = multer.diskStorage({
+    destination: '../app/public/assets',
+    filename: function (req, file, cb) {
+      const originalName = path.parse(file.originalname).name;
+      const username = 'teste'//req.user.username; // Supondo que o nome do usuário logado esteja disponível no objeto de solicitação (req.user.username)
+      const uniqueFileName = `${username}-${originalName}-${Date.now()}${path.extname(file.originalname)}`;
+      cb(null, uniqueFileName);
+    },
+  });
+
+  const upload = multer({ storage: storage });
 
 // DEPARTAMENTO, MEMBRO, USUARIO
 
@@ -34,7 +50,8 @@ Routers.delete('/del-usuario', UsuarioController.delete);
 //ROTAS UNICAS
 Routers.post('/login', LoginController.login);
 Routers.get('/home', HomeController.home);
-Routers.post('uploadFoto', UsuarioUploadImgController.uploadFoto);
+
+Routers.post('/uploadfoto', upload.single('imagem'), UsuarioUploadImgController.uploadFoto);
 
 
 

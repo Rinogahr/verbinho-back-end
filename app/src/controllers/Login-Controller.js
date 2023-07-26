@@ -1,15 +1,10 @@
-const loginRepository = require("../repository/Login-Repository.js");
+const LoginService = require('../service/Login-Service');
 
 class loginController{
 
     async login(req, res){
-        let resultBD = await loginRepository.search(req.body);
-
-        return  res.json({
-            status: true,
-            mensagem: `Usuário valido`, //texto de exemplo mudar depois
-            result: resultBD
-        });
+        let resultBD = await LoginService.AuthService(req.body);
+        return  res.send(resultBD);
 }
 }
 

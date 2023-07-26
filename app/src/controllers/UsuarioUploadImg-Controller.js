@@ -2,11 +2,17 @@ const usuarioUploadImgRepository = require("../repository/UsuarioUploadImg-Repos
 
 class usuarioUploadImgController{
 
-    async uploadFoto(){
+    async uploadFoto(req, res, next){
 
-        let img = single('img');
+        if (!req.file) {
+            return res.status(400).json({ error: 'Nenhuma imagem selecionada para upload.' });
+          }
+        
+          const imageUrl = req.file.filename;
+    
+          return imageUrl;
 
-        return await  usuarioUploadImgRepository.storage(img);
+        //return await  usuarioUploadImgRepository.storage(img);
     }
 
 }
