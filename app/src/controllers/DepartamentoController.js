@@ -1,4 +1,4 @@
-const departamentoRepository = require("../repository/Departamento-Repository");
+const departamentoRepository = require("../repository/DepartamentoRepository");
 
 class DepartamentoController{
 

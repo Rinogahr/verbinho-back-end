@@ -1,4 +1,4 @@
-const membroRepository = require("../repository/Membro-Repository.js");
+const membroRepository = require("../repository/MembroRepository.js");
 
 class MembroController{
 

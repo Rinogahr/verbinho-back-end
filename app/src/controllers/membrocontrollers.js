@@ -1,4 +1,4 @@
-const  membroModels  = require("../models/membro-models");
+const  membroModels  = require("../models/membromodels");
 const { json } = require("express");
 
 module.exports = {

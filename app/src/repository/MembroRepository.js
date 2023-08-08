@@ -1,5 +1,5 @@
 const {querySync} = require("../../../mysql/connection");
-const UsuarioRepository = require("../repository/Usuario-Repository.js");
+const UsuarioRepository = require("./UsuarioRepository.js");
 
 class MembroRepository{
 

@@ -1,4 +1,4 @@
-const loginRepository = require("../repository/Login-Repository");
+const loginRepository = require("../repository/LoginRepository");
 
 class LoginService  {
 

@@ -1,4 +1,4 @@
-const homeRepository = require("../repository/Home-Repository.js");
+const homeRepository = require("../repository/HomeRepository.js");
 
 class homeController{
 

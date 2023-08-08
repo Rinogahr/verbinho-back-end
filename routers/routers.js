@@ -2,12 +2,12 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const Routers = express.Router();
-const DepartamentoController = require("../app/src/controllers/Departamento-Controller");
-const MembroController = require("../app/src/controllers/Membro-Controller");
-const UsuarioController = require("../app/src/controllers/Usuario-controller");
-const LoginController = require("../app/src/controllers/Login-Controller.js");
-const HomeController = require("../app/src/controllers/Home-Controller.js");
-const UsuarioUploadImgController = require("../app/src/controllers/UsuarioUploadImg-Controller.js");
+const DepartamentoController = require("../app/src/controllers/DepartamentoController");
+const MembroController = require("../app/src/controllers/MembroController");
+const UsuarioController = require("../app/src/controllers/UsuarioController");
+const LoginController = require("../app/src/controllers/LoginController.js");
+const HomeController = require("../app/src/controllers/HomeController.js");
+const UsuarioUploadImgController = require("../app/src/controllers/UsuarioUploadImgController.js");
 
 
 // Configurando o armazenamento dos arquivos de upload

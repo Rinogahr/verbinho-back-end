@@ -1,4 +1,4 @@
-const usuarioUploadImgRepository = require("../repository/UsuarioUploadImg-Repository.js");
+const usuarioUploadImgRepository = require("../repository/UsuarioUploadImgRepository.js");
 
 class usuarioUploadImgController{
 

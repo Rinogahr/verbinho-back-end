@@ -1,4 +1,5 @@
-const usuarioRepository = require("../repository/Usuario-Repository.js")
+const usuarioRepository = require("../repository/UsuarioRepository.js");
+const usuarioService = require("../service/UsuarioService.js");
 
 class UsuarioDepartamentoController{
 
@@ -15,7 +16,7 @@ class UsuarioDepartamentoController{
     }
 
     async store(req,res){
-        let resultBD = await usuarioRepository.creater(req.body);
+        let resultBD = await usuarioService.Create(req.body);
 
         return res.send(resultBD);
     }
